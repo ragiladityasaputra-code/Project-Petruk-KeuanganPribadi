@@ -1,7 +1,9 @@
+#File utama: mengimpor package keuangan lalu menjalankan program (menu intraktif).
 from keuangan import fileio
 from keuangan.processing import Pengeluaran, PencatatKeuangan
 from keuangan.validasi import DataTidakValid
 
+#Data awal. tiga baris terakhir sengaja dibuat salah untuk menguji validasi data.
 DATA_AWAL = [
     "2026-10-01;Makan;Nasi goreng;15000",
     "2026-10-01;Transport;Ojek online;22000;metode=QRIS",
@@ -15,13 +17,13 @@ DATA_AWAL = [
     "2026-10-04;;Parkir;3000",
 ]
 
-def muat_pencatat(nama_file):
+def muat_pencatat(nama_file): #Baca file data lalu masukkan setiap baris yang valid ke objek PencttKeuang.
     pencatat = PencatatKeuangan()
     for pengeluaran in fileio.baca_data(nama_file):
         pencatat.tambah(pengeluaran)
     return pencatat
 
-def input_pengeluaran():
+def input_pengeluaran(): #Minta input dari pengguna, ulangi terus sampai datanya valid.
     while True:
         try:
             tanggal = input("Tanggal (YYYY-MM-DD): ")
@@ -30,12 +32,13 @@ def input_pengeluaran():
             nominal = input("Nominal (angka): ")
             metode = input("Metode bayar (boleh dikosongkan): ").strip()
             info = {"metode": metode} if metode else {}
+            #Keyword argument + **info untuk atribut opsional.
             return Pengeluaran(tanggal=tanggal, kategori=kategori, keterangan=keterangan, nominal=nominal, **info)
         except (ValueError, DataTidakValid) as error:
             print("Input tidak valid:", error)
             print("Silakan isi ulang.")
             
-def tampilkan_menu():
+def tampilkan_menu(): #Cetak daftar menu.
     print("\n=== MENU KEUANGAN PRIBADI ===")
     print("1. Lihat semua pengeluaran")
     print("2. Tambah pengeluaran baru")
@@ -44,7 +47,7 @@ def tampilkan_menu():
     print("5. Uji pesan file tidak ditemukan")
     print("0. Keluar")
     
-def main():
+def main(): #Alur utama program
     nama_file = fileio.NAMA_FILE_DATA
     fileio.buat_file_data(nama_file, DATA_AWAL)
     pencatat = muat_pencatat(nama_file)

@@ -1,3 +1,6 @@
+#Modul testing. pengujian program memakai library unittest.
+#Jalankan dari folder proyek: python -m keuangan.testing.
+
 import contextlib
 import io
 import os
@@ -8,14 +11,14 @@ from keuangan import fileio
 from keuangan.processing import Pengeluaran, PencatatKeuangan, jumlahkan
 from keuangan.validasi import DataTidakValid, validasi_nominal, validasi_kategori
 
-def senyap(fungsi, *args, **kwargs):
+def senyap(fungsi, *args, **kwargs): #Jalankan fungsi menangkap print-nya, hasilnya (nilai, teks-output).
     penampung = io.StringIO()
     with contextlib.redirect_stdout(penampung):
         nilai = fungsi(*args, **kwargs)
     return nilai, penampung.getvalue()
 
 class TestKeuangan(unittest.TestCase):
-    def setUp(self):
+    def setUp(self): #Data contoh dibuat ulang sebelum setiap pengujian.
         self.pencatat = PencatatKeuangan()
         contoh = [
             ("2026-10-01", "makan", "Nasi goreng", 15000),

@@ -1,10 +1,11 @@
+#Modul validasi: pengecekan input dan data pengeluaran.
 from datetime import datetime
 
-
+#Exception bautan sendiri untuk data yang melanggar aturan program.
 class DataTidakValid(Exception):
     pass
 
-def validasi_nominal(nominal):
+def validasi_nominal(nominal): #Ubah nominal ke int. non-angka = ValueError, - = DataTidakValid.
         try:
             angka = int(nominal)
         except (ValueError, TypeError):
@@ -13,19 +14,19 @@ def validasi_nominal(nominal):
             raise DataTidakValid(f"Nominal tidak boleh negatif: {angka}")
         return angka
 
-def validasi_kategori(kategori):
+def validasi_kategori(kategori): #Pastikan kategori tidak kosong, lalu rapikan huruf.
     bersih = str(kategori).strip()
     if not bersih:
         raise DataTidakValid("Kategori tidak boleh kosong")
     return bersih.title()
 
-def validasi_keterangan(keterangan):
+def validasi_keterangan(keterangan): #Pastikan keterangan tidak kosong.
     bersih = str(keterangan).strip()
     if not bersih:
         raise DataTidakValid("Keterangan tidak boleh kosong")
     return bersih
 
-def validasi_tanggal(tanggal):
+def validasi_tanggal(tanggal): #Pastikan tanggal tidak kosong, dan berformat.
     bersih = str(tanggal).strip()
     try:
         datetime.strptime(bersih, "%Y-%m-%d")
@@ -33,7 +34,7 @@ def validasi_tanggal(tanggal):
         raise ValueError(f"Format tanggal salah (harus YYYY-MM-DD): {bersih!r}") from None
     return bersih
 
-def validasi_baris(baris):
+def validasi_baris(baris): #Pecah satu baris file
     bagian = [b.strip() for b in baris.split(";")]
     if len(bagian) < 4:
         raise DataTidakValid(f"Kolom kurang, butuh minimal 4 kolom: {baris!r}")
@@ -51,7 +52,7 @@ def validasi_baris(baris):
     nominal = validasi_nominal(bagian[3])
     return tanggal, kategori, keterangan, nominal, tambahan
 
-if __name__ == "__main__":
+if __name__ == "__main__": #Pengujian lokal: hanya jalan kalau dieksekusi langsung (python -m keuangan.validasi)
     print("Nominal valid :", validasi_nominal("15000"))
     for contoh in ("-500", "abc"):
         try:
