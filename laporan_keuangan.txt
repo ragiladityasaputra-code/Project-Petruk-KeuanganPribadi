@@ -1,0 +1,24 @@
+LAPORAN KEUANGAN PRIBADI
+============================================================
+2026-10-01 | Makan      | Nasi goreng            |   Rp15.000
+2026-10-01 | Transport  | Ojek online            |   Rp22.000 | metode=QRIS
+2026-10-02 | Makan      | Ayam geprek            |   Rp18.000
+2026-10-02 | Hiburan    | Langganan musik        |   Rp54.000 | catatan=bulanan
+2026-10-04 | Transport  | Bensin                 |   Rp50.000
+2026-10-05 | Makan      | Bakso                  |   Rp20.000
+2026-10-05 | Pendidikan | Fotokopi materi        |    Rp7.500
+2026-10-10 | Makan      | Sate                   |   Rp20.000 | metode=Cash
+------------------------------------------------------------
+Jumlah transaksi   : 8
+Total pengeluaran  : Rp206.500
+Rata-rata per hari : Rp41.300
+Kategori terboros  : Makan (Rp73.000)
+Total per kategori :
+  Hiburan         Rp54.000
+  Makan           Rp73.000
+  Pendidikan       Rp7.500
+  Transport       Rp72.000
+3 pengeluaran terbesar:
+  1. Langganan musik (Rp54.000)
+  2. Bensin (Rp50.000)
+  3. Ojek online (Rp22.000)
