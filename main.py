@@ -66,7 +66,7 @@ def main(): #Alur utama program
         elif pilihan == "3":
             print(pencatat.buat_laporan())
         elif pilihan == "4":
-            fileio.tulis_laporan(pencatat.buatlaporan())
+            fileio.tulis_laporan(pencatat.buat_laporan())
             print("Laporan disimpan ke", fileio.NAMA_FILE_LAPORAN)
         elif pilihan == "5":
             fileio.baca_data("file_tidak_ada.txt")
